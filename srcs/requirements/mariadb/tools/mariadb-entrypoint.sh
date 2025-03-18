@@ -12,7 +12,7 @@ skip-name-resolve
 skip-host-cache
 socket=/run/mysqld/mysqld.sock
 EOF
-fi
+# fi
 
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Initializing database..."
