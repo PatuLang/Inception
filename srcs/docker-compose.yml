@@ -9,7 +9,7 @@ services:
       - mariadb-data:/var/lib/mysql
     networks:
       - docker-network
-    restart: always
+    # restart: always
 
   wordpress:
     build: requirements/wordpress
