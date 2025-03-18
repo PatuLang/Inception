@@ -8,15 +8,14 @@ cat << EOF > /etc/my.cnf.d/mariadb-server.cnf
 [mysqld]
 bind-address=0.0.0.0
 skip-networking=0
+skip-name-resolve
+skip-host-cache
 EOF
 fi
 
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Initializing database..."
-    mysql_install_db --user=mysql --datadir=/var/lib/mysql --skip-test-db --group=mysql \
-	 --auth-root-authentication-method=socket >/dev/null 2>/dev/null
-    mysqld_safe --skip-networking &
-    mysqld_pid=$!
+    mysql_install_db --user=mysql --datadir=/var/lib/mysql --skip-test-db --group=mysql
 fi
 
 echo "MariaDB started. Setting up users and database..."
