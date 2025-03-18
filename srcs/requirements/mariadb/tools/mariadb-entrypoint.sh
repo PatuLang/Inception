@@ -10,6 +10,7 @@ bind-address=0.0.0.0
 skip-networking=0
 skip-name-resolve
 skip-host-cache
+socket=/run/mysqld/mysqld.sock
 EOF
 fi
 
