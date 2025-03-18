@@ -9,7 +9,7 @@ services:
       - mariadb-data:/var/lib/mysql
     networks:
       - docker-network
-    # restart: always
+    restart: on-failure
 
   wordpress:
     build: requirements/wordpress
@@ -22,7 +22,7 @@ services:
       - docker-network
     depends_on:
       - mariadb
-    restart: always
+    restart: on-failure
 
   nginx:
     build: requirements/nginx
@@ -35,7 +35,7 @@ services:
       - docker-network
     depends_on:
       - wordpress
-    restart: always
+    restart: on-failure
 
 
 
