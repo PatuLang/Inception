@@ -16,13 +16,12 @@ fi
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Initializing database..."
     mysql_install_db --user=mysql --datadir=/var/lib/mysql --skip-test-db --group=mysql
-fi
-
 echo "MariaDB started. Setting up users and database..."
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;"
 mysql -u root -e "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';"
 mysql -u root -e "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%';"
 mysql -u root -e "FLUSH PRIVILEGES;"
+fi
 
 mysqladmin shutdown
 exec mysqld_safe
