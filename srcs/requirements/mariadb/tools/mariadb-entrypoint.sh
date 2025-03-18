@@ -2,7 +2,7 @@
 
 set -e
 
-if [ ! -e /etc/my.cnf.d/mariadb-server.cnf ]; then
+# if [ ! -e /etc/my.cnf.d/mariadb-server.cnf ]; then
 echo "Applying MariaDB configuration..."
 cat << EOF > /etc/my.cnf.d/mariadb-server.cnf
 [mysqld]
