@@ -21,4 +21,6 @@ RUN chmod +x /usr/local/bin/wordpress-entrypoint.sh
 
 RUN adduser -D -H -s /sbin/nologin -g www-data -G www-data www-data
 
+RUN echo "memory_limit = 512" > /etc/php83/php.ini
+
 ENTRYPOINT [ "wordpress-entrypoint.sh" ]
