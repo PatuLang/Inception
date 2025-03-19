@@ -1,4 +1,4 @@
-FROM alpine:3.20.5
+FROM alpine:3.20.6
 
 EXPOSE 9000
 
@@ -16,7 +16,7 @@ COPY tools/wordpress-entrypoint.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/wordpress-entrypoint.sh
 
-RUN mkdir -p /var/www/wp
+RUN mkdir -p /var/www/html
 RUN adduser -D -H -s /sbin/nologin -g www-data -G www-data www-data
 
 ENTRYPOINT [ "wordpress-entrypoint.sh" ]
