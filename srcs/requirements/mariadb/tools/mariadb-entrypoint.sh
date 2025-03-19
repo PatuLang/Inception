@@ -2,27 +2,6 @@
 
 set -e
 
-# if [ ! -e /etc/my.cnf.d/mariadb-server.cnf ]; then
-echo "Applying MariaDB configuration..."
-cat << EOF > /etc/my.cnf.d/mariadb-server.cnf
-[mysqld]
-user=mysql
-socket=/run/mysqld/mysqld.sock
-pid-file=/run/mysqld/mariadb.pid
-log_error=/var/log/mysql/error.log
-port=3306
-bind-address=0.0.0.0
-skip-networking=0
-skip-name-resolve
-skip-host-cache
-
-EOF
-# fi
-
-chown -R mysql:mysql /var/run/mysqld && \
-chown -R mysql:mysql /var/log/mysql && \
-chown -R mysql:mysql /var/lib/mysql
-
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Initializing MariaDB..."
     mysql_install_db --user=mysql --datadir=/var/lib/mysql --skip-test-db --group=mysql
