@@ -6,8 +6,8 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Initializing MariaDB..."
     mysql_install_db --user=mysql --datadir=/var/lib/mysql --skip-test-db --group=mysql
 
-    echo "Starting MariaDB temporarily..."
-	mysqld --user=mysql --skip-networking --socket=/var/run/mysqld/mysqld.sock &
+    # echo "Starting MariaDB temporarily..."
+	# mysqld --user=mysql --skip-networking --socket=/var/run/mysqld/mysqld.sock &
 
     echo "Waiting for MariaDB to start..."
     until mysqladmin ping --socket=/var/run/mysqld/mysqld.sock --silent; do
@@ -27,8 +27,9 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 	EOF
 
     
-    echo "Shutting down temporary MariaDB..."
-    mysqladmin shutdown --socket=/var/run/mysqld/mysqld.sock -uroot -p"$MYSQL_ROOT_PASSWORD"
+    # echo "Shutting down temporary MariaDB..."
+    # mysqladmin shutdown --socket=/var/run/mysqld/mysqld.sock -uroot -p"$MYSQL_ROOT_PASSWORD"
 fi
 
-exec mysqld_safe
+echo "Starting MariaDB"
+exec mysqld --user=mysql
