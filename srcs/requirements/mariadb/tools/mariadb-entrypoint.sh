@@ -15,7 +15,7 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 	done
 
     echo "Setting up database and users..."
-	mysql --socket=/var/run/mysqld/mysqld.sock -uroot <<-EOF
+	mysql --user=mysql --bootstrap <<-EOF
 		FLUSH PRIVILEGES;
 		ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
 		CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
