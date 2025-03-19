@@ -15,7 +15,7 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 	# done
 
     echo "Setting up database and users..."
-	mysql --bootstrap --datadir=/var/lib/mysql --user=mysql <<-EOF
+	mysqld --bootstrap --datadir=/var/lib/mysql --user=mysql <<-EOF
 
         USE mysql;
 		FLUSH PRIVILEGES;
