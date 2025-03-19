@@ -9,10 +9,10 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
     # echo "Starting MariaDB temporarily..."
 	# mysqld --user=mysql --skip-networking --socket=/var/run/mysqld/mysqld.sock &
 
-    echo "Waiting for MariaDB to start..."
-    until mysqladmin ping --socket=/var/run/mysqld/mysqld.sock --silent; do
-		    sleep 2
-	done
+    # echo "Waiting for MariaDB to start..."
+    # until mysqladmin ping --socket=/var/run/mysqld/mysqld.sock --silent; do
+	# 	    sleep 2
+	# done
 
     echo "Setting up database and users..."
 	mysql --user=mysql --bootstrap <<-EOF
