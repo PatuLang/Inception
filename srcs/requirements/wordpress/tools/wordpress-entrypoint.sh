@@ -5,8 +5,8 @@ set -e
 WORDPRESS_CONFIG_PATH="/var/www/html/wp-config.php"
 
 echo "Waiting for MariaDB to start..."
-until mysqladmin ping -h"$MYSQL_HOST" --silent; do
-    sleep 2
+until mariadb-admin ping --protocol=tcp --host=mariadb -u"$MYSQL_USER" --password="$MYSQL_PASSWORD" --wait >/dev/null 2>&1; do                                    
+	sleep 2                                                                                                                                                       
 done
 
 echo "MariaDB is up and running."
@@ -30,7 +30,7 @@ if [ ! -f "$WORDPRESS_CONFIG_PATH" ]; then
     echo "wp-config.php configured successfully."
 fi
 
-if ! wp core is-installed --allow-root --path=/var/www/html; then
+if [! wp core is-installed --allow-root --path=/var/www/html]; then
     echo "Installing WordPress..."
     wp core install --allow-root \
         --url="https://$DOMAIN_NAME" \
