@@ -5,9 +5,6 @@ RUN apk update && apk add --no-cache mariadb mariadb-client mariadb-common bash
 RUN mkdir -p /var/run/mysqld && \
 	mkdir -p /var/log/mysql && \
 	mkdir -p /var/lib/mysql && \
-	chown -R mysql:mysql /var/run/mysqld && \
-	chown -R mysql:mysql /var/log/mysql && \
-	chown -R mysql:mysql /var/lib/mysql
 
 COPY tools/mariadb-entrypoint.sh /usr/local/bin/
 

@@ -31,8 +31,6 @@ fclean: down
 	@sudo rm -rf $(WORDPRESS_DATA_DIR)/*
 	@sudo rm -rf $(MARIADB_DATA_DIR)/*
 
-logs:
-	@docker-compose -f $(DOCKER_COMPOSE_FILE) --env-file $(ENV_FILE) logs -f
 
 .PHONY: all build down re clean fclean logs create_dirs make_dir_up make_dir_up_build
 
