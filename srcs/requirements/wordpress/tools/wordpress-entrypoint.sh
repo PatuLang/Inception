@@ -11,21 +11,22 @@ echo "MariaDB is up and running!"
 
 echo "Setting file permissions for Wordpress..."
 chown -R www-data:www-data /var/www/html
-chown -R 755 /var/www/html
 
-if ! wp core is-installed --path=/var/www/html --allow-root; then
+cd /var/www/html
+
+if ! wp core is-installed --allow-root; then
     echo "WordPress is not installed. Installing now..."
 
-    wp core download --path=/var/www/html --allow-root
+    wp core download --allow-root
 
-    wp config create --path=/var/www/html \
+    wp config create \
         --dbname=${MYSQL_DATABASE} \
         --dbuser=${MYSQL_USER} \
         --dbpass=${MYSQL_PASSWORD} \
         --dbhost=mariadb \
         --allow-root
 
-    wp core install --path=/var/www/html \
+    wp core install \
         --url=${DOMAIN_NAME} \
         --title=${WORDPRESS_TITLE} \
         --admin_user=${WORDPRESS_ADMIN_USER} \
@@ -33,7 +34,7 @@ if ! wp core is-installed --path=/var/www/html --allow-root; then
         --admin_email=${WORDPRESS_ADMIN_EMAIL} \
         --allow-root
 
-    wp user create --path=/var/www/html \
+    wp user create \
         ${WORDPRESS_USER} ${WORDPRESS_USER_EMAIL} \
         --user_pass=${WORDPRESS_USER_PASSWORD} \
         --allow-root

@@ -11,12 +11,14 @@ RUN mkdir -p /var/www/html && \
 	chmod +x wp-cli.phar && \
 	mv wp-cli.phar /usr/local/bin/wp
 
+WORKDIR /var/www/html
+RUN chown -R 775 /var/www/html
+
 COPY conf/www.conf /etc/php83/php-fpm.d/www.conf
 COPY tools/wordpress-entrypoint.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/wordpress-entrypoint.sh
 
-RUN mkdir -p /var/www/html
 RUN adduser -D -H -s /sbin/nologin -g www-data -G www-data www-data
 
 ENTRYPOINT [ "wordpress-entrypoint.sh" ]
