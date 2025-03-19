@@ -19,17 +19,16 @@ re: down create_dirs make_dir_up_build
 clean: down
 	@printf "Cleaning configuration ${name}...\n"
 	@docker system prune -a
-	@sudo rm -rf $(WORDPRESS_DATA_DIR)/*
-	@sudo rm -rf $(MARIADB_DATA_DIR)/*
+	@sudo rm -rf $(WORDPRESS_DATA_DIR)
+	@sudo rm -rf $(MARIADB_DATA_DIR)
 
 fclean: down
 	@printf "Total clean of all configurations docker\n"
-#	@docker stop $$(docker ps -qa)
 	@docker system prune --all --force --volumes
 	@docker network prune --force
 	@docker volume prune --force
-	@sudo rm -rf $(WORDPRESS_DATA_DIR)/*
-	@sudo rm -rf $(MARIADB_DATA_DIR)/*
+	@sudo rm -rf $(WORDPRESS_DATA_DIR)
+	@sudo rm -rf $(MARIADB_DATA_DIR)
 
 
 .PHONY: all build down re clean fclean logs create_dirs make_dir_up make_dir_up_build
