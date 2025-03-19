@@ -10,11 +10,9 @@ done
 echo "MariaDB is up and running!"
 
 echo "Setting file permissions for Wordpress..."
-chown -R www-data:www-data /var/www/html
-
 cd /var/www/html
 
-if ! wp core is-installed --allow-root; then
+if [ ! -f wp-config.php ]; then
     echo "WordPress is not installed. Installing now..."
 
     wp core download --allow-root
@@ -40,6 +38,9 @@ if ! wp core is-installed --allow-root; then
         --allow-root
 
 fi
+
+chown -R www-data:www-data /var/www/html
+chmod -R 755 /var/www/html/wp-content
 
 echo "Starting PHP-FPM..."
 exec php-fpm83 -F
