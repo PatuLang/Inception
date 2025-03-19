@@ -10,6 +10,8 @@ services:
     networks:
       - docker-network
     restart: on-failure
+    expose:
+      - 3306
 
   wordpress:
     build: requirements/wordpress
@@ -23,6 +25,8 @@ services:
     depends_on:
       - mariadb
     restart: on-failure
+    expose:
+      - 9000
 
   nginx:
     build: requirements/nginx
@@ -36,6 +40,8 @@ services:
     depends_on:
       - wordpress
     restart: on-failure
+    ports: 
+      - "443:443"
 
 
 

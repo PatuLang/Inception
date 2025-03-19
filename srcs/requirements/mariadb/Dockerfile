@@ -7,12 +7,9 @@ COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 
 RUN chmod +x /usr/local/bin/mariadb-entrypoint.sh
 
-RUN mkdir -p /var/run/mysqld && \
-	mkdir -p /var/log/mysql && \
-	mkdir -p /var/lib/mysql && \
-	chown -R mysql:mysql /var/run/mysqld && \
-	chown -R mysql:mysql /var/log/mysql && \
-	chown -R mysql:mysql /var/lib/mysql
+RUN mkdir -p /var/run/mysqld && chown -R mysql:mysql /var/run/mysqld
+RUN mkdir -p /var/log/mysql && chown -R mysql:mysql /var/log/mysql
+RUN mkdir -p /var/lib/mysql && chown -R mysql:mysql /var/lib/mysql
 
 EXPOSE 3306
 
