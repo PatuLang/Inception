@@ -11,7 +11,7 @@ RUN chmod +x /usr/local/bin/nginx-entrypoint.sh
 RUN adduser -D -H -s /sbin/nologin -g www-data -G www-data www-data
 
 RUN mkdir -p /etc/nginx/ssl && \
-	openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+	sh -c openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 	-keyout "$CERTS_KEY" \
 	-out "$CERTS_CERT" \
 	-subj "/C=FI/ST=Uusimaa/L=Helsinki/CN=$DOMAIN_NAME"
