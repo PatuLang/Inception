@@ -48,9 +48,6 @@ services:
   nginx:
     build: requirements/nginx
     container_name: nginx
-    environments:
-      - CERTS_KEY=${CERTS_KEY}
-      - CERTS_CRT=${CERTS_CRT}
     env_file:
       - .env
     volumes:
