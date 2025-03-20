@@ -36,3 +36,12 @@ create_dirs:
 	@printf "Creating data directories...\n"
 	@mkdir -p $(WORDPRESS_DATA_DIR)
 	@mkdir -p $(MARIADB_DATA_DIR)
+
+logs:
+	@printf "Showing logs for MariaDB...\n"
+	@docker logs -f mariadb || true
+	@printf "Showing logs for WordPress...\n"
+	@docker logs -f wordpress || true
+	@printf "Showing logs for Nginx...\n"
+	@docker logs -f nginx || true
+	@printf "Logs finished.\n"
