@@ -9,9 +9,14 @@ done
 
 echo "WordPress is up! Configuring Nginx"
 
-# Debug SSL variables
-echo "CERTS_KEY: $CERTS_KEY"
-echo "CERTS_CERT: $CERTS_CRT"
+if [ ! -f "$CERTS_KEY" ] || [ ! -f "$CERTS_CRT" ]; then
+  echo "SSL certificates not found. Generating new certificates..."
+  
+  openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout "$CERTS_KEY" \
+    -out "$CERTS_CRT" \
+    -subj "/C=FI/ST=Uusimaa/L=Helsinki/CN=$DOMAIN_NAME"
+fi
 
 cat << EOF >> /etc/nginx/http.d/default.conf
 server {

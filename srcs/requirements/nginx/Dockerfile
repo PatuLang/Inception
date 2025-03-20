@@ -10,10 +10,4 @@ RUN chmod +x /usr/local/bin/nginx-entrypoint.sh
 
 RUN adduser -D -H -s /sbin/nologin -g www-data -G www-data www-data
 
-RUN mkdir -p /etc/nginx/ssl
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-	-keyout "$CERTS_KEY" \
-	-out "$CERTS_CRT" \
-	-subj "/C=FI/ST=Uusimaa/L=Helsinki/CN=$DOMAIN_NAME"
-
 ENTRYPOINT [ "nginx-entrypoint.sh" ]
