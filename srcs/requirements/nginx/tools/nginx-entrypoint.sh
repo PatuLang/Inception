@@ -9,14 +9,19 @@ done
 
 echo "WordPress is up! Configuring Nginx"
 
+# Debug SSL variables
+echo "CERTS_KEY: $CERTS_KEY"
+echo "CERTS_CERT: $CERTS_CERT"
+
 cat << EOF >> /etc/nginx/http.d/default.conf
 server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
     server_name $DOMAIN_NAME;
 
     ssl_certificate_key $CERTS_KEY;
-    ssl_certificate $CERTS_CERT;
+    ssl_certificate $CERTS_CRT;
     ssl_protocols TLSv1.3;
 
     root /var/www/html;
