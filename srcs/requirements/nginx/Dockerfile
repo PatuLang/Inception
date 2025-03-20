@@ -12,8 +12,8 @@ RUN adduser -D -H -s /sbin/nologin -g www-data -G www-data www-data
 
 RUN mkdir -p /etc/nginx/ssl && \
 	openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-	-keyout /etc/nginx/ssl/plang.key \
-	-out /etc/nginx/ssl/plang.crt \
-	-subj "/CN=$DOMAIN_NAME"
+	-keyout "$CERTS_KEY" \
+	-out "$CERTS_CERT" \
+	-subj "/C=FI/ST=Uusimaa/L=Helsinki/CN=$DOMAIN_NAME"
 
 ENTRYPOINT [ "nginx-entrypoint.sh" ]

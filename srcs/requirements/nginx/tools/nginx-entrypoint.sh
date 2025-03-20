@@ -3,11 +3,11 @@
 set -e
 
 echo "Waiting for WordPress to be fully up..."
-until curl -sSf "http://$WORDPRESS_HOST/wp-login.php" > /dev/null; do
+until curl -sSf "https://$DOMAIN_NAME/wp-login.php" > /dev/null; do
     sleep 2
 done
 
-echo "✅ WordPress is up!"
+echo "WordPress is up! Configuring Nginx"
 
 cat << EOF >> /etc/nginx/http.d/default.conf
 server {
@@ -15,8 +15,8 @@ server {
     listen [::]:443 ssl http2;
     server_name $DOMAIN_NAME;
 
-    ssl_certificate /etc/nginx/ssl/plang.crt;
-    ssl_certificate_key /etc/nginx/ssl/plang.key;
+    ssl_certificate_key $CERTS_KEY;
+    ssl_certificate $CERTS_CERT;
     ssl_protocols TLSv1.3;
 
     root /var/www/html;
