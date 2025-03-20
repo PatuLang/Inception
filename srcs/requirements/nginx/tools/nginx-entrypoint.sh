@@ -11,7 +11,7 @@ echo "WordPress is up! Configuring Nginx"
 
 # Debug SSL variables
 echo "CERTS_KEY: $CERTS_KEY"
-echo "CERTS_CERT: $CERTS_CERT"
+echo "CERTS_CERT: $CERTS_CRT"
 
 cat << EOF >> /etc/nginx/http.d/default.conf
 server {
