@@ -10,4 +10,6 @@ RUN chmod +x /usr/local/bin/nginx-entrypoint.sh
 
 RUN adduser -D -H -s /sbin/nologin -g www-data -G www-data www-data
 
+RUN mkdir -p /etc/nginx/ssl
+
 ENTRYPOINT [ "nginx-entrypoint.sh" ]
