@@ -9,6 +9,18 @@ done
 
 echo "WordPress is up! Configuring Nginx"
 
+if [ ! -f "$CERTS_KEY" ] || [ ! -f "$CERTS_CRT" ]; then
+  echo "SSL certificates not found. Generating new certificates..."
+  
+  openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout "$CERTS_KEY" \
+    -out "$CERTS_CRT" \
+    -subj "/C=FI/ST=Uusimaa/L=Helsinki/CN=$DOMAIN_NAME"
+
+    chmod 600 "$CERTS_KEY"
+    chmod 600 "$CERTS_CRT"
+fi
+
 cat << EOF >> /etc/nginx/http.d/default.conf
 server {
     listen 443 ssl;
