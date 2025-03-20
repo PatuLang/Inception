@@ -20,9 +20,9 @@ server {
     http2 on;
     server_name $DOMAIN_NAME;
 
+    ssl_protocols TLSv1.3;
     ssl_certificate_key $CERTS_KEY;
     ssl_certificate $CERTS_CRT;
-    ssl_protocols TLSv1.3;
 
     root /var/www/html;
     index index.php index.html index.htm;
