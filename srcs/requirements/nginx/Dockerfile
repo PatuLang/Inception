@@ -16,7 +16,7 @@ RUN sh -c openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 	-out "$CERTS_CRT" \
 	-subj "/C=FI/ST=Uusimaa/L=Helsinki/CN=$DOMAIN_NAME"
 
-RUN chmod 600 "$CERTS_KEY"
-RUN chmod 600 "$CERTS_CRT"
+RUN sh -c chmod 600 "$CERTS_KEY"
+RUN sh -c chmod 600 "$CERTS_CRT"
 
 ENTRYPOINT [ "nginx-entrypoint.sh" ]
