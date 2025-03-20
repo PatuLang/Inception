@@ -39,9 +39,9 @@ create_dirs:
 
 logs:
 	@printf "Showing logs for MariaDB...\n"
-	@docker logs -f mariadb --until true
+	@timeout 10 docker logs -f mariadb || true
 	@printf "Showing logs for WordPress...\n"
-	@docker logs -f wordpress --until true
+	@timeout 10 docker logs -f wordpress || true
 	@printf "Showing logs for Nginx...\n"
-	@docker logs -f nginx --until true
+	@timeout 10 docker logs -f nginx || true
 	@printf "Logs finished.\n"
