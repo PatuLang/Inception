@@ -3,7 +3,7 @@
 set -e
 
 echo "Waiting for WordPress to be fully up..."
-until curl -sSf "https://$DOMAIN_NAME/wp-login.php" > /dev/null; do
+until [ -f "/var/www/html/wp-config.php" ]; do
     sleep 2
 done
 
