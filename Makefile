@@ -39,10 +39,3 @@ create_dirs:
 
 logs:
 	@docker-compose -f $(DOCKER_COMPOSE_FILE) --env-file $(ENV_FILE) logs -f
-	# @printf "Showing logs for MariaDB...\n"
-	# @timeout 10 docker logs -f mariadb || true
-	# @printf "Showing logs for WordPress...\n"
-	# @timeout 10 docker logs -f wordpress || true
-	# @printf "Showing logs for Nginx...\n"
-	# @timeout 10 docker logs -f nginx || true
-	# @printf "Logs finished.\n"
