@@ -14,7 +14,7 @@ services:
       - mariadb-data:/var/lib/mysql
     networks:
       - docker-network
-    restart: on-failure
+    restart: always
     expose:
       - 3306
 
@@ -41,7 +41,7 @@ services:
       - docker-network
     depends_on:
       - mariadb
-    restart: on-failure
+    restart: always
     expose:
       - 9000
 
@@ -56,7 +56,7 @@ services:
       - docker-network
     depends_on:
       - wordpress
-    restart: on-failure
+    restart: always
     ports: 
       - "443:443"
 
