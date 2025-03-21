@@ -7,7 +7,7 @@ until [ -f "/var/www/html/wp-config.php" ]; do
     sleep 2
 done
 
-echo "WordPress is up! Configuring Nginx"
+echo "WordPress is up!"
 
 if [ ! -f "$CERTS_KEY" ] || [ ! -f "$CERTS_CRT" ]; then
   echo "SSL certificates not found. Generating new certificates..."
@@ -21,7 +21,9 @@ if [ ! -f "$CERTS_KEY" ] || [ ! -f "$CERTS_CRT" ]; then
     chmod 600 "$CERTS_CRT"
 fi
 
-cat << EOF >> /etc/nginx/http.d/default.conf
+if ! grep -q "server_name $DOMAIN_NAME;" "/etc/nginx/http.d/default.conf"; then
+    echo "Applying Nginx configuration!"
+    cat << EOF >> /etc/nginx/http.d/default.conf
 server {
     listen 443 ssl;
     listen [::]:443 ssl;
@@ -51,6 +53,9 @@ server {
     }
 }
 EOF
+else
+    echo "Nginx is already configured, moving on..."
+fi
 
 echo "Nginx configuration generated successfully!"
 echo "Starting Nginx..."
