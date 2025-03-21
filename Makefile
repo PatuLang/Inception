@@ -32,7 +32,7 @@ fclean:	down
 	@sudo rm -rf $(WORDPRESS_DATA_DIR)
 	@sudo rm -rf $(MARIADB_DATA_DIR)
 
-re:		fclean up
+re:		fclean build
 
 .PHONY:	all build down re clean fclean logs create_dirs
 
